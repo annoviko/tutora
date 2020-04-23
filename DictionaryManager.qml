@@ -9,16 +9,23 @@ ApplicationWindow {
     color: "#ffffff"
     visible: true
 
+    Item {
+        id: color_button
+
+        property var color_mouse_out: "#86e47d"
+        property var color_mouse_in: "#70d965"
+        property var color_mouse_press: "#44bb37"
+    }
+
     Rectangle {
         id: button_insert
         x: 581
         y: 35
         width: 40
         height: 40
-        color: "#86e47d"
+        color: color_button.color_mouse_out
         radius: 10
         border.width: 0
-        border.color: "#86e47d"
 
         Text {
             text: "+"
@@ -28,6 +35,34 @@ ApplicationWindow {
             smooth: true
             font.pixelSize: parent.width * 0.75
             anchors.fill: parent
+        }
+
+        MouseArea {
+            property string state_mouse_in: "MouseIn"
+            property string state_mouse_out: "MouseOut"
+            property string state_mouse: state_mouse_out
+
+            anchors.fill: parent
+            hoverEnabled: true
+            onEntered: {
+                state_mouse = state_mouse_in
+                parent.color = color_button.color_mouse_in
+            }
+            onExited: {
+                state_mouse = state_mouse_out
+                parent.color = color_button.color_mouse_out
+            }
+            onPressed: {
+                parent.color = color_button.color_mouse_press
+            }
+            onReleased: {
+                if (state_mouse == state_mouse_in) {
+                    onEntered()
+                }
+                else if (state_mouse == state_mouse_out) {
+                    onExited()
+                }
+            }
         }
     }
 

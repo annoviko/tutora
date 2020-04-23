@@ -1,7 +1,7 @@
-#include "MainWindow.h"
-
 #include <QApplication>
 #include <QQmlApplicationEngine>
+
+#include "MainWindow.h"
 
 
 #define FRONT_END_TYPE_QML
