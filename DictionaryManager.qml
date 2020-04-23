@@ -2,12 +2,14 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 
 
-ApplicationWindow {
+Item {
     id: dictionary_manager
     width: 640
     height: 320
-    color: "#ffffff"
+    //color: "#ffffff"
     visible: true
+
+    signal signal_dict_insert(string p_word, string p_translation)
 
     Item {
         id: color_button
@@ -62,6 +64,17 @@ ApplicationWindow {
                 else if (state_mouse == state_mouse_out) {
                     onExited()
                 }
+            }
+            onClicked: {
+                if (text_key.text.trim().length == 0) {
+                    return
+                }
+
+                if (text_value.text.trim().length == 0) {
+                    return
+                }
+
+                dictionary_manager.signal_dict_insert(text_key.text, text_value.text)
             }
         }
     }

@@ -1,4 +1,4 @@
-QT       += core gui sql qml
+QT       += core gui sql qml quick
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -35,6 +35,7 @@ HEADERS += \
     OrmDictionaryContainer.h \
     OrmDictionaryEntry.h \
     OrmTranslationEntry.h \
+    QmlDictionaryManager.h \
     Singletone.h \
     TranslationEntry.h
 
