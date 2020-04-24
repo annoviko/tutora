@@ -2,11 +2,11 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 
 
-Item {
+Rectangle {
     id: dictionary_manager
     width: 640
     height: 320
-    //color: "#ffffff"
+    color: "#ffffff"
     visible: true
 
     signal signal_dict_insert(string p_word, string p_translation)
@@ -21,13 +21,14 @@ Item {
 
     Rectangle {
         id: button_insert
-        x: 581
-        y: 35
         width: 40
         height: 40
         color: color_button.color_mouse_out
         radius: 10
         border.width: 0
+        anchors.left: input_value.right
+        anchors.verticalCenter: input_value.verticalCenter
+        anchors.margins: 20
 
         Text {
             text: "+"
@@ -66,117 +67,36 @@ Item {
                 }
             }
             onClicked: {
-                if (text_key.text.trim().length == 0) {
+                if (input_key.text.trim().length == 0) {
                     return
                 }
 
-                if (text_value.text.trim().length == 0) {
+                if (input_value.text.trim().length == 0) {
                     return
                 }
 
-                dictionary_manager.signal_dict_insert(text_key.text, text_value.text)
+                dictionary_manager.signal_dict_insert(input_key.text, input_value.text)
             }
         }
     }
 
-    Rectangle {
-        id: text_key_shadow
-        x: 15
-        y: 20
+    InputWordLine {
+        id: input_key
+        x: 10
+        y: 10
         width: 270
         height: 70
-        color: "#dad8d8"
-        radius: 3
-
-        Rectangle {
-            id: text_key_panel
-            x: 2
-            y: -2
-            width: 270
-            height: 70
-            color: "#f9f9f9"
-            radius: 3
-
-            Rectangle {
-                id: text_key_line
-                x: 10
-                y: parent.height / 2 + 10
-                width: parent.width - x * 2
-                height: 1
-                color: "#6e6e6e"
-            }
-
-            TextInput {
-                id: text_key
-                x: text_key_line.x + 5
-                width: text_key_line.width - 5
-                height: 20
-                anchors.bottom: text_key_line.top
-                anchors.margins: 1
-                text: qsTr("")
-                font.pixelSize: 15
-            }
-
-            Label {
-                id: label_key
-                x: text_key_line.x + 5
-                y: text_key_line.y
-                color: "#6e6e6e"
-                text: qsTr("Ducth Word")
-                font.italic: true
-                font.pixelSize: 12
-            }
-        }
+        title: "Dutch Word"
     }
 
-    Rectangle {
-        id: text_value_shadow
-        anchors.left: text_key_shadow.right
-        anchors.leftMargin: 10
-        y: text_key_shadow.y
+    InputWordLine {
+        id: input_value
         width: 270
         height: 70
-        color: "#dad8d8"
-        radius: 3
+        title: "Tranlation"
 
-        Rectangle {
-            id: text_value_panel
-            x: 2
-            y: -2
-            width: 270
-            height: 70
-            color: "#f9f9f9"
-            radius: 3
-
-            Rectangle {
-                id: text_value_line
-                x: 10
-                y: parent.height / 2 + 10
-                width: parent.width - x * 2
-                height: 1
-                color: "#6e6e6e"
-            }
-
-            TextInput {
-                id: text_value
-                x: text_value_line.x + 5
-                width: text_key_line.width - 5
-                height: 20
-                anchors.bottom: text_value_line.top
-                anchors.margins: 1
-                text: qsTr("")
-                font.pixelSize: 15
-            }
-
-            Label {
-                id: label_value
-                x: text_value_line.x + 5
-                y: text_value_line.y
-                color: "#6e6e6e"
-                text: qsTr("Tranlation")
-                font.italic: true
-                font.pixelSize: 12
-            }
-        }
+        anchors.left: input_key.right
+        anchors.verticalCenter: input_key.verticalCenter
+        anchors.margins: 10
     }
 }
