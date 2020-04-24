@@ -3,13 +3,17 @@
 #include <QString>
 
 #include "DictionaryEntry.h"
+#include "DictionaryContainer.h"
 
 
 class DictionaryManager {
+private:
+    DictionaryContainer m_table;
+
 public:
-    static bool InsertWord(const QString & p_word, const QString & p_translation);
+    bool InsertWord(const QString & p_word, const QString & p_translation);
 
-    static DictionaryEntry FindTranslation(const QString & p_word);
+    DictionaryEntry FindTranslation(const QString & p_word);
 
-    static QList<DictionaryEntry> GetDictionary();
+    const DictionaryContainer & GetDictionary();
 };

@@ -14,6 +14,7 @@ Item {
         id: rect_shadow
         x: 0
         y: 0
+        visible: true
         width: parent.width
         height: parent.height
         color: color_shadow

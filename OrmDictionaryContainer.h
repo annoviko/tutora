@@ -2,10 +2,10 @@
 
 #include <QList>
 
-#include "DictionaryEntry.h"
+#include "DictionaryContainer.h"
 
 
 class OrmDictionaryContainer {
 public:
-    QList<DictionaryEntry> Select() const;
+    DictionaryContainer Select() const;
 };

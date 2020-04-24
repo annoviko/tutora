@@ -20,33 +20,35 @@ SOURCES += \
     DictionaryEntry.cpp \
     DictionaryManager.cpp \
     Main.cpp \
-    MainWindow.cpp \
     OrmDictionaryContainer.cpp \
     OrmDictionaryEntry.cpp \
     OrmTranslationEntry.cpp \
+    QmlDictionaryManager.cpp \
+    QmlDictionaryTableModel.cpp \
     TranslationEntry.cpp
 
 HEADERS += \
     DatabaseConnection.h \
     DatabaseInstance.h \
+    DictionaryContainer.h \
     DictionaryEntry.h \
     DictionaryManager.h \
-    MainWindow.h \
     OrmDictionaryContainer.h \
     OrmDictionaryEntry.h \
     OrmTranslationEntry.h \
     QmlDictionaryManager.h \
+    QmlDictionaryTableModel.h \
     Singletone.h \
     TranslationEntry.h
 
-FORMS += \
-    MainWindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    DictionaryManager.qml \
-    InputWordLine.qml
+DISTFILES +=
+
+RESOURCES += \
+    QmlUi.qrc

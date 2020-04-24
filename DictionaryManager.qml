@@ -1,9 +1,11 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
+import QtQuick.Window 2.13
 
 
-Rectangle {
+Window {
     id: dictionary_manager
+    objectName: "dictionary_manager"
     width: 640
     height: 320
     color: "#ffffff"

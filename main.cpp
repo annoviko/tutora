@@ -3,7 +3,6 @@
 #include <QQuickItem>
 #include <QQuickView>
 
-#include "MainWindow.h"
 #include "QmlDictionaryManager.h"
 
 
@@ -14,20 +13,23 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-#if defined(FRONT_END_TYPE_FORMS)
-    MainWindow w;
-    w.show();
-#elif defined(FRONT_END_TYPE_QML)
-    QQuickView view(QUrl::fromLocalFile("../tutora/DictionaryManager.qml"));
-    QObject * item = view.rootObject();
+#if defined(FRONT_END_TYPE_QML)
+    QQmlApplicationEngine engine;
+
+    const QUrl url(QStringLiteral("qrc:/DictionaryManager.qml"));
+    QQmlComponent component(&engine, url);
+    component.create();
 
     QmlDictionaryManager dictionary_manager;
-    QObject::connect(item, SIGNAL(signal_dict_insert(QString, QString)),
-                     &dictionary_manager, SLOT(SlotInsert(QString, QString)));
 
-    view.show();
-//    QQmlApplicationEngine engine;
-//    engine.load(QUrl::fromLocalFile("../tutora/DictionaryManager.qml"));
+//    auto children = main_window->contentItem()->childItems();
+//    for (auto & child : children) {
+//        QObject * item = child->findChild<QObject *>("dictionary_manager");
+//        if (item) {
+//            QObject::connect(item, SIGNAL(signal_dict_insert(QString, QString)), &dictionary_manager, SLOT(SlotInsert(QString, QString)));
+//        }
+//    }
+
 #endif
 
     return app.exec();

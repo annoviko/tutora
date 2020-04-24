@@ -6,7 +6,7 @@
 #include "DatabaseInstance.h"
 
 
-QList<DictionaryEntry> OrmDictionaryContainer::Select() const {
+DictionaryContainer OrmDictionaryContainer::Select() const {
     DatabaseConnection & connection = DatabaseInstance::Get();
     QSqlQuery query(connection.Get());
 
@@ -15,7 +15,7 @@ QList<DictionaryEntry> OrmDictionaryContainer::Select() const {
                   "FROM dictionary_keys FULL OUTER JOIN dictionary_values "
                   "ON dictionary_keys.id = dictionary_values.key_id");
 
-    QList<DictionaryEntry> collection;
+    DictionaryContainer collection;
     if (query.exec()) {
         while(query.next()) {
             QUuid key_id = query.value(0).toUuid();
@@ -26,7 +26,7 @@ QList<DictionaryEntry> OrmDictionaryContainer::Select() const {
             QString audio_path = query.value(5).toString();
 
             DictionaryEntry entry = DictionaryEntry(key_id, word, picture_path, TranslationEntry(value_id, translation, audio_path));
-            collection.push_back(entry);
+            collection.insert(entry.GetWord(), entry);
         }
     }
 

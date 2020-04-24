@@ -6,9 +6,11 @@
 
 
 class QmlDictionaryManager : public QObject {
-Q_OBJECT
+    Q_OBJECT
+
+private:
+    DictionaryManager m_manager;
+
 public slots:
-    bool SlotInsert(const QString & p_word, const QString & p_translation) {
-        return DictionaryManager::InsertWord(p_word, p_translation);
-    }
+    bool SlotInsert(const QString & p_word, const QString & p_translation);
 };
