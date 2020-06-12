@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>DictionaryManager.qml</file>
+        <file>InputWordLine.qml</file>
+    </qresource>
+</RCC>
